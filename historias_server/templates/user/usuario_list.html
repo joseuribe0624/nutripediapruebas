@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block nav_title %}Usuarios{% endblock %}
+
+{% block content %}
+    
+    <div class="card">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-9 pr-4">
+                    <h4 class="card-title">Lista de usuarios</h4>
+                </div>
+               
+                <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
+                    <a href="{% url 'usuarios:crear' %}" class="btn btn-primary btn-round  btn-block">Crear usuario</a>
+                </div>
+            </div>
+            <form>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group no-border">
+                        <input type="text" value="{{ full_name }}" name="full_name" class="form-control" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div class="input-group no-border">
+                        <input type="text" value="{{ username }}" name="username" class="form-control" placeholder="Nombre de usuario">
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div class="input-group no-border">
+                        <input type="text" value="{{ email }}" name="email" class="form-control" placeholder="Correo">
+                    </div>
+                </div>
+                
+                
+                <div class="col-md-3 pl-1 d-flex justify-content-center align-items-start">
+                    <div class="input-group no-border">
+                        <button class="btn mt-0 btn-round btn-block btn-primary no-border text-white font-weight-bold text-uppercase">
+                            Buscar <i class="nc-icon nc-zoom-split text-white"></i>
+                        </button>
+                    </div>
+                    <!-- <button class="btn  btn-round m-0">Buscar</button> -->
+                </div>
+                </div>
+            </form>
+            <div class="table-responsive pb-0">
+                <table class="table mb-0">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th> Nombre </th>
+                            <th> Nombre de usuario </th>
+                            <th> Correo </th>
+                            <th> Rol </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in page_obj %}
+                            <tr class="clickable-row" data-href="{% url 'usuarios:editar' user.uuid %}">
+                                <td>{{ user.nombre_perfil }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }} </td>
+                                <td>{{ user.get_rol_display }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer pt-0">
+            <hr>
+            <div class="m-2 d-flex d-flex justify-content-between">
+                {% if page_obj.has_previous %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page=1">Primero</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ page_obj.previous_page_number }}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ page_obj.next_page_number }}">Siguiente</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ page_obj.paginator.num_pages }}">Último</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

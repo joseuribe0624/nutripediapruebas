@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Editar usuario: {{object.nombre_perfil}}{% endblock %}
+{% block nav_title %}Editar usuario: {{object.nombre_perfil}}{% endblock %}
+
+{% block content %}
+  {% include "user/usuario_form.html" %}
+{% endblock %}
+{% block extra_js %}
+  {% include "user/usuario_form_js.html" %}
+{% endblock %}

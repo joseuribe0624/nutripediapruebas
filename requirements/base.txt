@@ -1,0 +1,9 @@
+django-environ==0.4.5
+psycopg2-binary
+psycopg2==2.8.4
+django-allauth==0.41.0
+django-crispy-forms==1.9.0
+django-shortuuidfield==0.1.3
+sentry-sdk==0.14.4
+wkhtmltopdf==0.2
+django-wkhtmltopdf

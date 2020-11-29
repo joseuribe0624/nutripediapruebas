@@ -1,0 +1,5 @@
+-r base.txt
+
+gunicorn
+django_heroku
+whitenoise

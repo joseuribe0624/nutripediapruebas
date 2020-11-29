@@ -1,0 +1,210 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% if object %}
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header pb-1">
+          <h5 class="modal-title" id="exampleModalLongTitle">¿Está seguro que desea eliminar este paciente?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pb-1">
+            Si elimina este paciente todas la historias clínicas y pacientes que haya creado el mismo quedarán desvinculadas, pero no eliminadas.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Cerrar</button>
+          <form method="post" action="{% url 'usuarios:eliminar-pacientes' object.uuid %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-round">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card card-user">
+        <br/>
+        <div class="row">
+            <div class="col-md-4 pr-1">
+            </div>
+            <div class="col-md-4 pr-1" style="text-align:center; margin-top:20px" >
+                <h5 class="card-title">Datos Paciente</h5>
+            </div>
+            <div class="col-md-4 pr-1">
+            </div>
+        </div>
+        <div class="card-body">
+            {% if object %}
+            <div class="row">
+                <div class="col-md-4 pr-1">
+                </div>
+                <div class="col-md-4 pr-1">
+                    <a href="{% url 'historias:lista-historias' paciente.uuid %}" class="btn btn-primary btn-round  btn-block">Historias</a>
+                </div>
+                <div class="col-md-4 pr-1">
+                </div>
+            </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.estado_civil|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.tipo_documento|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.num_documento|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.direccion|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.telefono|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.fecha_nacimiento|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                    <div class="form-group">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 pr-1">
+                    </div>
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            {{ form.genero|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+                {% if object %}
+                    <div class="row" style="display: none;" id="nutricionista">
+                        <div class="col-md-3 pr-1">
+                        </div>
+                        <div class="col-md-6 pr-1">
+                            <div class="form-group">
+                                {{ form.nutricionista|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-md-3 pr-1">
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="{% if object %}col-md-3{% else %}col-md-6{% endif %} pr-1">
+                    </div>
+                    {% if object %}
+                    <div class="col-md-2 pr-1">
+                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn btn-danger btn-round">Eliminar</button>
+                    </div>
+                    {% endif %}
+                    {% if object %}
+                        <div class="col-md-2 pr-1">
+                            <button id="remitir" type="button" class="btn btn-warning btn-round">Remitir</button>
+                        </div>
+                    {% endif %}
+                    <div class="col-md-2 pl-1">
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+<div class="col-md-1"></div>
